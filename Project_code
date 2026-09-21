@@ -1,0 +1,121 @@
+import java.util.Calendar;
+import java.util.Scanner;
+public class code {
+    static String[] books = {
+    "Java", "DSA", "Mathematics", "Computer Organization"
+};
+
+static int[] copies = {5, 3, 4, 2};
+static int[] ids = {101, 102, 103, 104};
+    static void displayBooks(){
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("\nAvailable Books:");
+
+    for (String book : books) {
+        System.out.println(book);
+    }
+    }
+    static void searchBooks(){
+            Scanner sc = new Scanner(System.in);
+
+    System.out.print("Enter Book Name: ");
+    String name = sc.nextLine();
+    for (int i = 0; i < books.length; i++) {
+
+        if (books[i].equalsIgnoreCase(name)) {
+            System.out.println("Book Found!");
+            System.out.println("ID: " + ids[i]);
+            System.out.println("Copies: " + copies[i]);
+            return;
+        }
+    }
+    System.out.println("Book Not Found!");
+}
+    static void Addbooks(){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter Name of the Book: ");
+            String book_a = sc.nextLine();
+            System.out.println("Author Name : ");
+            String author = sc.nextLine();
+            System.out.println("Number of Copies : ");
+            int copies = sc.nextInt();
+            System.out.println("Thankyou for adding these Books into our Collectionn!!!...");
+        }
+        static void BorrowBook(){
+            Scanner sc = new Scanner(System.in);
+
+            System.out.print("Enter Book ID: ");
+            int id = sc.nextInt();
+            Calendar cal = Calendar.getInstance();
+
+    for (int i = 0; i < ids.length; i++) {
+
+        if (ids[i] == id) {
+
+            if (copies[i] > 0) {
+                copies[i]--;
+                System.out.println("Book Borrowed Successfully!");
+                System.out.println("Issue Date  : " +cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
+                cal.add(Calendar.DATE,14);
+                System.out.println("Return Date : " +cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
+            } else {
+                System.out.println("No Copies Available!");
+            }
+
+            return;
+        }
+    }
+    System.out.println("Invalid Book ID");
+}
+    static void returnBook(){
+        Scanner sc = new Scanner(System.in);
+
+    System.out.print("Enter Book ID: ");
+    int id = sc.nextInt();
+
+    for (int i = 0; i < ids.length; i++) {
+
+        if (ids[i] == id) {
+            copies[i]++;
+            System.out.println("Book Returned Successfully!");
+            return;
+        }
+    }
+
+    System.out.println("Invalid Book ID");
+}
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int choice;
+do{
+            System.out.println("-------COMMUNITY LIBRARY SYSTEM-------");
+            System.out.println("1 . Display Books \n2 . Search \n3 . Add \n4 . Borrow \n5 . Return\n6 . Exit");
+            choice = sc.nextInt();
+            sc.nextLine();
+            
+    switch(choice){
+        case 1:
+            displayBooks();
+            break;
+        case 2: 
+            searchBooks();
+            break;
+        case 3:
+            Addbooks();
+            break;
+        case 4:
+            BorrowBook();
+            break;
+        case 5:
+            returnBook();
+            break;
+        case 6:
+            System.out.println("ThankYou For VISITING OUR LIBRARY");
+            break;
+        default:    
+            System.out.println("Invalid Choice");
+        }
+    }while(choice !=6);
+    }
+}
